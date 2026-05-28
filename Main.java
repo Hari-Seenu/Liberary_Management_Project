@@ -6,11 +6,31 @@ public class Main {
     but after making books as static,the changes in Main.books inside the method is reflect to Main.books.
     */
     static Scanner in = new Scanner(System.in);
-    static public int dis(){
-        System.out.println("IF YES THEN 1 ELSE 0");
-        int o = in.nextInt();
-        in.nextLine();
-        return (o==1)?1:(o==0)?2:-1;
+    static public int dis(){//used for rent book (more then one book).
+        while(true){
+            System.out.println("IF YES THEN 1 ELSE 0: ");
+            int o = in.nextInt();
+            in.nextLine();  
+            if(o==1 || o==0){
+                return o;
+            }
+            System.out.println("IDHA KOODA PATHU PODAMUDIYANA....\nI REPEAT AGAIN");
+        }
+        
+
+        
+    }
+    static public int cout(int qun){
+            while(true){
+                System.out.println("ENTER COUNT: ");
+                int o = in.nextInt();
+                in.nextLine();
+                if(o<=qun){
+                    return o;
+                }
+                System.out.println("IDHA KOODA PATHU PODAMUDIYANA....\nI REPEAT AGAIN");
+            }
+        
     }
    
     public static void main(String[] args) {
@@ -51,9 +71,11 @@ public class Main {
                 else{
                     System.out.println("LOGIN SUCCESSFULLY");
                 }
-                System.out.println("ENTER SERVICE NUMBER:");
+                
                 ui:while(true){
-                    System.out.println("1.BOOK LIST \n2.RENT BOOKS\n3.RETURN BOOK\n4.OWN SHELF");
+                    int bn;//for store book id
+                    System.out.println("1.BOOK LIST \n2.RENT BOOKS\n3.RETURN BOOK\n4.OWN SHELF\n5.EXIT");
+                    System.out.println("ENTER SERVICE NUMBER: ");
                     int op = in.nextInt();
                     in.nextLine();
                     switch (op) {
@@ -61,14 +83,14 @@ public class Main {
                             Librarien.libBook();
                             break;
                         case 2://book rent
-                            System.out.println("ENTER BOOK ID:");
-                            int bn = in.nextInt();
+                            System.out.println("ENTER BOOK ID: ");
+                            bn = in.nextInt();
                             in.nextLine();
                             bn=um.rentBook(bn);
                             if(bn==1){
                                 System.out.println("BOOK ADDED TO SHELF SUCCESSFULLY");
                             }
-                            if(bn==2){
+                            if(bn==0){
                                 System.out.println("NOT ADDED SUCCESSFULLY");
                             }
                             else if(bn==-2){
@@ -78,12 +100,25 @@ public class Main {
                                 System.out.println("BOOK NOT FOUND");
                             }
                             break;
+                        case 3:
+                            System.out.println("ENTER BOOK ID: ");
+                            bn = in.nextInt();
+                            in.nextLine();
+                            bn=um.returnBook(bn);
+                            if(bn==1){
+                                System.out.println("RETURNED BOOK SUCCESSFULLY");
+                            }
+                            else{
+                                System.out.println("BOOK NOT FOUND IN YOUR SHELF");
+                            }
+
 
                         case 4://own shelf
-                            um.ownShelf();
+                            um.ownShelf(um.Mname);
                             break;
 
                         case 5:
+                            System.out.println("OK BYE\nPOITU URUPUDRA VELAYA PARU.\nYOU CAN DO ALL ");
                             break ui;
                             
                     }
@@ -104,6 +139,7 @@ public class Main {
                 }
                 ui:while(true){
                     System.out.println("1.BOOK LIST \n2.ADD BOOKS\n3.MEMBERS LIST");
+                    System.out.println("ENTER SERVICE NUMBER: ");
                     int op = in.nextInt();
                     in.nextLine();
                     switch (op) {
