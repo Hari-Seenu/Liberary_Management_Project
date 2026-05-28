@@ -41,7 +41,7 @@ public class Main {
         List<Mem> Members = new ArrayList<>();
         List<Librarien> Librians = new ArrayList<>();
         
-        //Mwmbwers,Liberariens and books 
+        //Members,Liberariens and books 
         Members.add(new Mem("hari","hari123"));
         Members.add(new Mem("Luffy","MDL123"));
         Librians.add(new Librarien("Salasar", "lord"));
@@ -54,15 +54,19 @@ public class Main {
         
         
         System.out.println("HARI'S LIBRARY ");
-        System.out.println("LOGIN NOW: \n1 FOR MEMBER\n2 for LIBRARIEN");
-        int lc = in.nextInt();
-        in.nextLine();
-        System.out.println("Enter name: ");
-        String uname = in.nextLine().replace(" ","");
-        System.out.println("Enter Password: ");
-        String upass = in.nextLine();
-        switch (lc){
-            case 1:
+        String uname;
+        String upass;
+        
+        uo:while(true){
+            System.out.println("LOGIN NOW: \n1 FOR MEMBER\n2 for LIBRARIEN\n3 for EXIT");
+            int lc = in.nextInt();
+            in.nextLine();
+            switch (lc){
+            case 1://member
+                System.out.println("Enter name: ");
+                uname = in.nextLine().replace(" ","");
+                System.out.println("Enter Password: ");
+                upass = in.nextLine();
                 um = Mem.mCheck(Members,uname,upass);
                 if(um==null){
                     System.out.println("INVALID CARDINALS");
@@ -127,7 +131,11 @@ public class Main {
                 break;
                 
                 
-            case 2:
+            case 2://liberarien
+                System.out.println("Enter name: ");
+                uname = in.nextLine().replace(" ","");
+                System.out.println("Enter Password: ");
+                upass = in.nextLine();
                 ul=Librarien.lCheck(Librians, uname, upass);
                 if(ul==null){
                     System.out.println("INVALID CARDINALS");
@@ -156,9 +164,13 @@ public class Main {
                    
                 }
                 break;
+            case 3:
+                break uo;
             default:
                 System.out.println("(*->) IDHAYE OLUNGA PATHA PODA MUDIYALANA, APURO....");
+            }
         }
+        
         in.close();
 
         
