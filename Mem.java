@@ -19,12 +19,12 @@ public class Mem {
     public int rentBook(int bookId){
         for(Books book : Main.books ){//loop for iterate all books in List<Books> books as book.
             if(bookId== (int) book.id){//check needed bookin there or not.
-                if(book.qun>=0){// check its quantity.
+                if(book.qun>0){// check its quantity.
                 
                     if(this.mhold.stream().anyMatch(bok -> bok.getId()==book.getId())){//check that book is already in mhold(member book list)
                     //this.mhold == um object in main. in anyMatch(returns boolean true/false),bok is mhold books and book isin List<Books>books[line 19]      
                         
-                        System.out.println("YOU AREADY HAVE IT\nNEED TO ADD ?");
+                        System.out.println("YOU AREADY HAVE IT\nNEED TO ADD ?\nYES OR NO");
                         int op = Main.dis();//this is a decision static function from Main class. just a look it up 
                         if(op==1){
                                 
@@ -83,6 +83,4 @@ public class Mem {
         }
         System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
     }
-
-
 }
