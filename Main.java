@@ -11,10 +11,9 @@ public class Main {
     static public void searchBy(){
         int op;
         String names;
-        System.out.println();
         ui:while(true){
             System.out.println("SELECT YOUR SEARCHING PARAMETER: ");
-            System.out.println("1.ID\n2.BOOK NAME\n3.AUTHOR NAME\n4.GANURE\5.EXIT");
+            System.out.println("1.ID\n2.BOOK NAME\n3.AUTHOR NAME\n4.GANURE\n5.EXIT");
             op=in.nextInt();
             in.nextLine();
             switch(op){
@@ -39,7 +38,8 @@ public class Main {
                     System.out.printf("| %-10s | %-20s | %-20s | %-20s | %-10s |\n","ID","NAME","SOURSE","GENURE","QUANTITY");
                     System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
                     for(Books b: Main.books){
-                        if(b.bna.replace(" ", "").toLowerCase()==names){
+                        
+                        if(b.bna.replace(" ", "").toLowerCase().equals(names)){
                             System.out.printf("| %-10d | %-20s | %-20s | %-20s | %-10d |\n",b.id,b.bna,b.aut,b.gnr,b.qun);
                             System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
                         }
@@ -52,7 +52,7 @@ public class Main {
                     System.out.printf("| %-10s | %-20s | %-20s | %-20s | %-10s |\n","ID","NAME","SOURSE","GENURE","QUANTITY");
                     System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
                     for(Books b: Main.books){
-                        if(b.aut.replace(" ", "").toLowerCase()==names){
+                        if(b.aut.replace(" ", "").toLowerCase().equals(names)){
                             System.out.printf("| %-10d | %-20s | %-20s | %-20s | %-10d |\n",b.id,b.bna,b.aut,b.gnr,b.qun);
                             System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
                         }
@@ -65,7 +65,7 @@ public class Main {
                     System.out.printf("| %-10s | %-20s | %-20s | %-20s | %-10s |\n","ID","NAME","SOURSE","GENURE","QUANTITY");
                     System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
                     for(Books b: Main.books){
-                        if(b.gnr.replace(" ", "").toLowerCase()==names){
+                        if(b.gnr.replace(" ", "").toLowerCase().equals(names)){
                             System.out.printf("| %-10d | %-20s | %-20s | %-20s | %-10d |\n",b.id,b.bna,b.aut,b.gnr,b.qun);
                             System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
                         }
@@ -73,9 +73,8 @@ public class Main {
                 break;
                 case 5:
                     System.out.println("EXITED FROM SEARCH BAR ");
+                    op=0;
                 break ui;
-                    
-
             }
 
         }
@@ -163,6 +162,7 @@ public class Main {
                             break;
                         case 2:
                             Main.searchBy();
+                            break;
                         case 3://book rent
                             System.out.println("ENTER BOOK ID: ");
                             op = in.nextInt();//op is used here for store book id.
@@ -236,6 +236,7 @@ public class Main {
                             break;
                         case 2:
                             Main.searchBy();
+                            break;
                         case 3:
                             op=ul.addBooks();
                             if(op==1){
