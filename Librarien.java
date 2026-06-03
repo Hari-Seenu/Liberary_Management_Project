@@ -24,26 +24,32 @@ public class Librarien extends Main{
         System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
     }
 
-    public int addBooks(){
-        System.out.println("NEW STOCKS OR EXISTING STOCKS");
-        int op=Main.dis();
-        if(op==1){
-            Books newstock = this.addstock();    //this call addstock() and got new abooks object,that object is store in new stock
-            //Main.books.add(newstock)           that newstock book object is added to books. it is simplefied in below line.
-            if(newstock ==null){
-                return 0;
+   
+    public int updateStocks(){
+        while(true){
+            System.out.println("ENTER BOOK ID");
+            int bid=in.nextInt();
+            in.nextLine();
+            Books b = Books.getBook_id(bid);
+            if(b!=null){
+                System.out.println("BOOK IS FOUNDED\nENTER QUANTITY OF NEW STOCK");
+                int op=in.nextInt();
+                in.nextLine();
+                b.setQun(b.getQun()+op);
+                return 1;
+                
             }
             else{
-                Main.books.add(this.addstock());
-                return 1;
+                System.out.println("ENTER EXISTING BOOK ID\nTRY ANOTHER ID OR EXIT");
+                int op=Main.dis();
+                if(op==0){
+                    System.out.println("EXITED SUCCESSFULLY");
+                    return 0;
+                }
             }
         }
-        else if(op==0){
-            //developing.....
-        }
-        return 1;
     }
-    public Books addstock(){
+    public int addStock(){
         System.out.println("ENTER BOOK NAME: ");
         String bname = in.nextLine();
         System.out.println("ENTER BOOK AUTHOR NAME: ");
@@ -54,14 +60,15 @@ public class Librarien extends Main{
         int bquan = in.nextInt();
         in.nextLine();
         int oid;
-        ui:while(true){//loop for get valid or unique book id for new stocks
+        while(true){//loop for get valid or unique book id for new stocks
             System.out.println("ENTER BOOK ID ");
             int id = in.nextInt();
             in.nextLine();
             Books b = Main.books.stream().filter(bok->bok.getId()==id).findFirst().orElse(null);//checks if already book is exist with same id and return that book to b.if not exist then return null to b.
             if(b==null){//b is null.so, librarien id for newstock is unique(that specific id is not assigned to books in Main.books)
                 oid=id;//oid is used.because  final problem is occuer due to using "id" on return statement at end of method
-                break ui;//breaks the loop
+                Main.books.add(new Books(bname,bauth,bgnr,oid,bquan));//new book stock is added to Main.Books 
+                return 1;
             }
             else{//here b is not null.b contain the exixting book with that (librarien assigning id) "id" in Main.Books
                 System.out.println("BOOK ID IS ALREADY EXIST");
@@ -72,11 +79,10 @@ public class Librarien extends Main{
                 System.out.println("TRY ANOTHER ID OR EXIT");//asking for try another id or exit
                 int op=Main.dis();//0 for exit 1 for try another id
                 if (op==0) {//book not added
-                    return null;
+                    return 0;
                 }
-                //if op == 1, then automatically while loop is works.
             }
         }
-        return new Books(bname, bauth, bgnr, oid, bquan);
+        
     }
 }

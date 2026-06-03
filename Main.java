@@ -21,15 +21,7 @@ public class Main {
                     System.out.println("ENTER ID: ");
                     op=in.nextInt();
                     in.nextLine();
-                    System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
-                    System.out.printf("| %-10s | %-20s | %-20s | %-20s | %-10s |\n","ID","NAME","SOURSE","GENURE","QUANTITY");
-                    System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
-                    for(Books b: Main.books){
-                        if(b.id==op){
-                            System.out.printf("| %-10d | %-20s | %-20s | %-20s | %-10d |\n",b.id,b.bna,b.aut,b.gnr,b.qun);
-                            System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
-                        }
-                    }
+                    Books.getBook_id(op);
                 break;
                 case 2:
                     System.out.println("ENTER BOOK NAME: ");
@@ -238,13 +230,28 @@ public class Main {
                             Main.searchBy();
                             break;
                         case 3:
-                            op=ul.addBooks();
-                            if(op==1){
-                                System.out.println("STOCK ADDED SUCCESSFULLY");
+                            System.out.println("WANT TO ADD NEW STOCK OR UPDATE EXISTING STOCK");
+                            op=Main.dis();
+                            if(op==1){//new stock
+                                op = ul.addStock();    
+                                if( op==1){
+                                    System.out.println("STOCK ADDED SUCCESSFULLY");
+                                }
+                                else{
+                                    System.out.println("STOCK ADDING CANCELLED");
+                                }
+                                
                             }
-                            else if(op==0){
-                                System.out.println("STOCK CANCELLED SUCCESSFULLY");
+                            else if(op==0){//update existing stock
+                                op = ul.updateStocks();
+                                if(op==1){
+                                    System.out.println("BOOK UPDATED SUCCESSFULLY");
+                                }
+                                else if(op==0){
+                                    System.out.println("FIND BOOKID BY SEARCH OR FILTER OPTION");
+                                }
                             }
+                            
 
                             break;
                         case 5:

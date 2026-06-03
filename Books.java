@@ -39,4 +39,18 @@ public class Books{
         this.qun = qun;
     }
 
+    public static Books getBook_id(int id){
+        System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
+        System.out.printf("| %-10s | %-20s | %-20s | %-20s | %-10s |\n","ID","NAME","SOURSE","GENURE","QUANTITY");
+        System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
+        for(Books b: Main.books){
+            if(b.id==id){
+                System.out.printf("| %-10d | %-20s | %-20s | %-20s | %-10d |\n",b.id,b.bna,b.aut,b.gnr,b.qun);
+                System.out.println("+------------+----------------------+----------------------+----------------------+------------+");
+                return b;
+            }
+        }
+        return null;
+    }
+
 }
